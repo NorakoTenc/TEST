@@ -18,8 +18,8 @@ public class AlloWebsiteTests
     {
         driver = new ChromeDriver();
         driver.Manage().Window.Maximize();
-        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10); // Implicit wait
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(25)); // Explicit wait
+        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10); // Implicit
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(25)); // Explicit
     }
 
     [TearDown]
@@ -31,19 +31,13 @@ public class AlloWebsiteTests
     [Test]
     public void ComplexInteractions()
     {
-        // Navigate to the website
         driver.Navigate().GoToUrl("https://allo.ua");
 
-        // Find the search input using different locators
         IWebElement searchInputById = wait.Until(ExpectedConditions.ElementIsVisible(By.Id("search-form__input")));//1
-
-        // Type in the search input
         searchInputById.SendKeys("iPhone");//1
 
         IWebElement searchButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"__layout\"]/div/header/div[1]/div[2]/div[3]/form/button[2]")));//2
         searchButton.Click();//1
-
-        // Wait for search results
         IWebElement searchResults = wait.Until(ExpectedConditions.ElementExists(By.CssSelector(".v-catalog__products")));//3
 
         IWebElement firstProductImage = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("product-card__img")));//4
@@ -69,24 +63,4 @@ public class AlloWebsiteTests
         IWebElement filtr = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"__layout\"]/div/div[1]/div[2]/div/div[2]/div[1]/div[1]/div[1]/div/ul/li[5]")));
 
     }
-
-    //[Test]
-    //public void ComplexInteractions()
-    //{
-    //    // Navigate to the website
-    //    driver.Navigate().GoToUrl("https://allo.ua");
-
-    //    // Perform some complex interactions (e.g., hover over an element)
-    //    IWebElement navMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(".nav-menu")));
-    //    Actions actions = new Actions(driver);
-    //    actions.MoveToElement(navMenu).Perform();
-
-    //    // Wait for sub-menu to appear
-    //    IWebElement subMenu = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".sub-menu")));
-
-    //    // Assertion
-    //    ClassicAssert.IsTrue(subMenu.Displayed);
-    //}
-
-    // Add more tests for other interactions as needed
 }
